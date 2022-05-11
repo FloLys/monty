@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
 * token_to_av - places the number of words size in an index null terminated
@@ -10,15 +10,15 @@ char **token_to_av(char *str, char *delim)
 {
 	char **index = NULL;
 	char *token = NULL;
-	int i = 0, size = 0, enter = 0;
+	int i = 0, size = 0;
 
 	size = token_cn(str, delim);
 
-	index = _calloc(sizeof(char *), (size + 1));
+	index = malloc(sizeof(char *) * (size + 1));
 	if (index == NULL)
 	{
-		perror("Unable to allocate");
-		exit(1);
+		perror("Error: malloc failed");
+		exit(EXIT_FAILURE);
 	}
 
 	token = strtok(str, delim);
@@ -26,10 +26,9 @@ char **token_to_av(char *str, char *delim)
 	for (i = 0; token; i++)
 	{
 		index[i] = token;
-		token = strtok(NULL, delim);
+		token = strtok(NULL, delim);/*next token*/
 	}
 	index[i] = NULL;
-	index[i - 1][enter] = '\0';
 	return (index);
 }
 /**
