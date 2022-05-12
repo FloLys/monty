@@ -23,8 +23,7 @@ int main(int argc, char **argv)
 	if (global.mfile == NULL) /*file could not open*/
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		free(global.buffer);
-		fclose(global.mfile);
+		free(global.buffer), fclose(global.mfile);
 		exit(EXIT_FAILURE);
 	}
 
@@ -38,15 +37,12 @@ int main(int argc, char **argv)
 		if (fn == NULL) /*function not found, null return*/
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, token1);
-			free(global.buffer);
-			fclose(global.mfile);
+			free(global.buffer), fclose(global.mfile);
 			exit(EXIT_FAILURE);
 		}
 		else /*execute*/
 			fn(&top, line_number);
 	}
-	free(global.buffer);
-	fclose(global.mfile);
-	free_dlistint(top);
+	free(global.buffer), fclose(global.mfile), free_dlistint(top);
 	return (EXIT_SUCCESS);
 }
