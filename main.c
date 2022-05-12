@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 	while (getline(&global.buffer, &bufsize, global.mfile) != -1)
 	{
 		line_number++;
-		token1 = strtok(global.buffer, " \n\t");
+		token1 = strtok(global.buffer, "\t \n\t");
 		fn = opcode_call(token1);
 		if (fn == NULL) /*function not found, null return*/
 		{
