@@ -33,10 +33,10 @@ void swap(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	
+
 	while (list->next != NULL)
 		list = list->next;
-	
+
 	data = list->n;
 	list->n = list->prev->n;
 	list->prev->n = data;
@@ -47,5 +47,5 @@ void swap(stack_t **stack, unsigned int line_number)
  * @line_number: line number
  */
 void nop(__attribute__((unused)) stack_t **stack,
-		  __attribute__((unused)) unsigned int line_number)
+			__attribute__((unused)) unsigned int line_number)
 {}
