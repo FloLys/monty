@@ -44,5 +44,5 @@ int main(int argc, char **argv)
 			fn(&top, line_number);
 	}
 	free(global.buffer), fclose(global.mfile), free_dlistint(top);
-	return (EXIT_SUCCESS);
+	return (0);
 }
