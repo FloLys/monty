@@ -1,4 +1,5 @@
-push -0
-
-push -1-2
+push	-2147483648
+pall
+nop
+push	2147483647
 pall

@@ -26,7 +26,6 @@ int main(int argc, char **argv)
 		free(global.buffer), fclose(global.mfile);
 		exit(EXIT_FAILURE);
 	}
-
 	while (getline(&global.buffer, &bufsize, global.mfile) != -1)
 	{
 		line_number++;

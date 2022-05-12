@@ -10,12 +10,12 @@ void (*opcode_call(char *op_sel))(stack_t **stack, unsigned int line_number)
 	instruction_t op_fn[] = {
 		{"push", push},
 		{"pall", pall},
+		{"pint", pint},
+		{"swap", swap},
+		{"nop", nop},
 /*
-*		{"pint", pint},
 *		{"pop", pop},
-*		{"swap", swap},
 *		{"add", add},
-*		{"nop", nop},
 */
 		{'\0', NULL}
 	};
