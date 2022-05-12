@@ -11,12 +11,9 @@ void (*opcode_call(char *op_sel))(stack_t **stack, unsigned int line_number)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"pop", pop},
 		{"swap", swap},
 		{"nop", nop},
-/*
-*		{"pop", pop},
-*		{"add", add},
-*/
 		{'\0', NULL}
 	};
 

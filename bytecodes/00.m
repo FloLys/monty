@@ -1,5 +1,5 @@
 push	-2147483648
 pall
-nop
+pop
 push	2147483647
 pall
