@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	size_t bufsize; /*buffer size capacity*/
 	stack_t *top = NULL; /*top of the stack*/
 	char *token1 = NULL;
-	unsigned int line_number = 1;
+	unsigned int line_number = 0;
 	void (*fn)(struct stack_s **, unsigned int);
 
 	if (argc != 2) /*no file or more than 1 argument in program call*/
