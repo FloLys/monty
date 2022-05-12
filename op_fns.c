@@ -10,7 +10,7 @@ void push(stack_t **stack, unsigned int line_number)
 	char *token2;
 	int i = 0, n = 0;
 
-	token2 = strtok(NULL, " "); /*next token*/
+	token2 = strtok(NULL, " \t\n"); /*next token*/
 	if (token2 == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
