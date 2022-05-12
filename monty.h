@@ -36,9 +36,23 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+* struct global_s - global variables
+* @mfile: file
+* @buffer: buffer
+* Description: global variables
+*/
+typedef struct global_s
+{
+FILE *mfile;
+char *buffer;
+} global_t;
+global_t global;
+
 int main(int argc, char **argv);
 void (*opcode_call(char *op_sel))(stack_t **stack, unsigned int line_number);
 stack_t *add_dnodeint(stack_t **stack, const int n);
+void free_dlistint(stack_t *head);
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, __attribute__((unused)) unsigned int line_number);

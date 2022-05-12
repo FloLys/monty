@@ -14,10 +14,12 @@ void push(stack_t **stack, unsigned int line_number)
 	if (token2 == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free(global.buffer);
+		fclose(global.mfile);
 		exit(EXIT_FAILURE);
 	}
 
-	if (token2[0] == '-' && token2[1])
+	if (token2[0] == '-' && token2[1] != '\0')
 		i = 1;
 
 	for (; token2[i] != '\n' && token2[i] != '\0'; i++)
@@ -25,11 +27,13 @@ void push(stack_t **stack, unsigned int line_number)
 		if (token2[i] < '0' || token2[i] > '9')
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			free(global.buffer);
+			fclose(global.mfile);
 			exit(EXIT_FAILURE);
 		}
-		n = atoi(token2);
-		add_dnodeint(stack, n);
 	}
+	n = atoi(token2);
+	add_dnodeint(stack, n);
 /*
 *	struct StackNode* stackNode = newNode(data);
 *    stackNode->next = *root;

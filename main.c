@@ -8,10 +8,8 @@
 */
 int main(int argc, char **argv)
 {
-	char *buffer = NULL; /*buffer with getline*/
 	size_t bufsize; /*buffer size capacity*/
 	stack_t *top = NULL; /*top of the stack*/
-	FILE *mfile;
 	char *token1 = NULL;
 	unsigned int line_number = 1;
 	void (*fn)(struct stack_s **, unsigned int);
@@ -21,31 +19,32 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file");
 		exit(EXIT_FAILURE);
 	}
-
-	mfile = fopen(argv[1], "r+");
-	if (mfile == NULL) /*file could not open*/
+	global.mfile = fopen(argv[1], "r+");
+	if (global.mfile == NULL) /*file could not open*/
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		free(global.buffer);
+		fclose(global.mfile);
 		exit(EXIT_FAILURE);
 	}
 
-	while (getline(&buffer, &bufsize, mfile) != -1)
+	while (getline(&global.buffer, &bufsize, global.mfile) != -1)
 	{
 		line_number++;
-		token1 = strtok(buffer, " \n\t");
+		token1 = strtok(global.buffer, " \n\t");
 		fn = opcode_call(token1);
 		if (fn == NULL) /*function not found, null return*/
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, token1);
+			free(global.buffer);
+			fclose(global.mfile);
 			exit(EXIT_FAILURE);
 		}
 		else /*execute*/
-		{
 			fn(&top, line_number);
-		}
 	}
-	free(buffer);
-/*	buffer = NULL;*/
-	fclose(mfile);
+	free(global.buffer);
+	fclose(global.mfile);
+	free_dlistint(top);
 	return (EXIT_SUCCESS);
 }
