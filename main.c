@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 {
 	size_t bufsize; /*buffer size capacity*/
 	stack_t *top = NULL; /*top of the stack*/
-	char *token1 = NULL;
+	char *command = NULL; /*command token 1*/
 	unsigned int line_number = 0;
 	void (*fn)(struct stack_s **, unsigned int);
 
@@ -29,14 +29,14 @@ int main(int argc, char **argv)
 	while (getline(&global.buffer, &bufsize, global.mfile) != -1)
 	{
 		line_number++;
-		token1 = strtok(global.buffer, " \t\n");
-		if (token1 == NULL || token1[0] == '#')
+		command = strtok(global.buffer, " \t\n");
+		if (command == NULL || command[0] == '#')
 			continue;
-		fn = opcode_call(token1);
+		fn = opcode_call(command);
 		if (fn == NULL) /*function not found, null return*/
 		{
-			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, token1);
-			free(global.buffer), fclose(global.mfile);
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, command);
+			free(global.buffer), fclose(global.mfile), free_dlistint(top);
 			exit(EXIT_FAILURE);
 		}
 		else /*execute*/

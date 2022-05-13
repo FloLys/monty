@@ -14,8 +14,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (token2 == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		free(global.buffer);
-		fclose(global.mfile);
+		free(global.buffer), fclose(global.mfile), free_dlistint(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -27,8 +26,7 @@ void push(stack_t **stack, unsigned int line_number)
 		if (token2[i] < '0' || token2[i] > '9')
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			free(global.buffer);
-			fclose(global.mfile);
+			free(global.buffer), fclose(global.mfile), free_dlistint(*stack);
 			exit(EXIT_FAILURE);
 		}
 	}

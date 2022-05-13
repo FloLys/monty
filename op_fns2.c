@@ -6,17 +6,18 @@
  */
 void pint(stack_t **stack, unsigned int line_number)
 {
-	stack_t *list;
+	stack_t *head;
 
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free(global.buffer), fclose(global.mfile), free_dlistint(*stack);
 		exit(EXIT_FAILURE);
 	}
-	list = *stack;
-	while (list->next != NULL)
-		list = list->next;
-	printf("%d\n", list->n);
+	head = *stack;
+	while (head->next != NULL)
+		head = head->next;
+	printf("%d\n", head->n);
 }
 /**
  * swap - swaps the top two elements of the stack
@@ -25,21 +26,22 @@ void pint(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *list = *stack;
+	stack_t *head = *stack;
 	int data;
 
-	if (*stack == NULL || list->next == NULL)
+	if (*stack == NULL || head->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		free(global.buffer), fclose(global.mfile), free_dlistint(*stack);
 		exit(EXIT_FAILURE);
 	}
 
-	while (list->next != NULL)
-		list = list->next;
+	while (head->next != NULL)
+		head = head->next;
 
-	data = list->n;
-	list->n = list->prev->n;
-	list->prev->n = data;
+	data = head->n;
+	head->n = head->prev->n;
+	head->prev->n = data;
 }
 /**
  * nop - nothing
